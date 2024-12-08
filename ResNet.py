@@ -7,7 +7,6 @@ import numpy as np
 from scipy.signal import convolve2d
 import matplotlib.pyplot as plt
 plt.style.use('fivethirtyeight')
-from IPython.display import HTML
 from base64 import b64encode
 
 class ResNet(nn.Module):
