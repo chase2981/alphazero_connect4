@@ -130,7 +130,8 @@ class Connect4Game:
             ).unsqueeze(0).to(config.device)
             value, _ = self.alphazero.network(state_tensor)
             confidence = (value.item() + 1) / 2 * 100  # Scale to 0-100%
-        self.ai_confidence = f"{confidence:.2f}%"
+        self.ai_confidence = f"{100 - confidence:.2f}%"
+        # self.ai_confidence = f"{self.agent.get_win_confidence(self.state, self.difficulty_map[self.difficulty]):.2f}%"
 
     def handle_move(self, column):
         if self.done:
