@@ -28,7 +28,7 @@ st.markdown("""
         .stColumn {
             // flex: 1 1 50px; /* Adjust this value for column width */
             // max-width: 50px; /* Same as above to limit the max width */
-            min-width: 40px;
+            min-width: 30px;
             // width: 50px !important;
             // margin: 2px;
             width: 100%;
@@ -38,7 +38,7 @@ st.markdown("""
             padding: 5px;
         }
         .dynamic-size {
-            font-size: 2rem; /* Default size for smaller screens */
+            font-size: 1rem; /* Default size for smaller screens */
         }
 
         @media (min-width: 768px) { /* Tablet size and above */
