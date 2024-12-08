@@ -23,7 +23,7 @@ class Connect4Game:
         self.done = False
         self.winning_slots = None
         self.difficulty_map = {"Easy": 200, "Medium": 500, "Hard": 1000}
-        self.difficulty = "Medium"
+        self.difficulty = "Easy"
         self.ai_confidence = "N/A"  # AI confidence as a percentage
 
     def check_winner(self):
@@ -131,7 +131,7 @@ game = st.session_state["connect4_game"]
 
 # Sidebar
 st.sidebar.header("Game Settings")
-difficulty = st.sidebar.selectbox("Select Difficulty", ["Easy", "Medium", "Hard"], index=1)
+difficulty = st.sidebar.selectbox("Select Difficulty", ["Easy", "Medium", "Hard"], index=0)
 game.difficulty = difficulty
 
 # Model Loading
@@ -187,10 +187,11 @@ for i, col in enumerate(cols):
         message = game.handle_move(i)
         if message:
             st.success(message)
+            st.sidebar.success(message)
         st.rerun()
 
 # AI Thinking Indicator
-if game.turn == 1:
+if game.turn == 1 and not game.done:
     st.markdown(game.ai_thinking_html(), unsafe_allow_html=True)
     time.sleep(1)  # Simulate AI thinking
     message = game.handle_move(None)  # AI makes its move
