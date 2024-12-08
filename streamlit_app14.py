@@ -35,7 +35,7 @@ st.markdown("""
             padding: 0px;
         }
         .customTd {
-            font-size: 300%; 
+            font-size: 3rem; 
             padding: 5px;
         }
     </style>
