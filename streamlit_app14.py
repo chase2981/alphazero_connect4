@@ -46,6 +46,12 @@ st.markdown("""
             font-size: 3rem;
             }
         }
+
+          @media (min-width: 1024px) { /* Laptop size and above */
+            .dynamic-size {
+            font-size: 4rem;
+            }
+        }
     </style>
 """, unsafe_allow_html=True)
 
