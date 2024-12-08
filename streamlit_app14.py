@@ -136,7 +136,7 @@ game.difficulty = difficulty
 
 # Model Loading
 model_selection = st.sidebar.selectbox(
-    "Select Model", ["Default Model", "50-epochs", "Trained Model 2"], index=0
+    "Select Model", ["Default Model", "50-epochs", "80-epochs"], index=0
 )
 if st.sidebar.button("Load Model"):
     try:
