@@ -1,6 +1,6 @@
-streamlit==1.26.0
-torch==2.0.1
-numpy==1.24.4
-matplotlib==3.8.1
-scipy==1.11.3
-pytz==2023.3
+streamlit
+torch
+numpy
+matplotlib
+scipy
+pytz
