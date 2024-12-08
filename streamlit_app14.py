@@ -35,8 +35,16 @@ st.markdown("""
             padding: 0px;
         }
         .customTd {
-            font-size: 3rem; 
             padding: 5px;
+        }
+        .dynamic-size {
+            font-size: 2rem; /* Default size for smaller screens */
+        }
+
+        @media (min-width: 768px) { /* Tablet size and above */
+            .dynamic-size {
+            font-size: 3rem;
+            }
         }
     </style>
 """, unsafe_allow_html=True)
@@ -90,7 +98,7 @@ class Connect4Game:
                     color = "🟡"
                 else:
                     color = "⚪"
-                html += f'<td class="customTd" style="{style}">{color}</td>'
+                html += f'<td class="customTd dynamic-size" style="{style}">{color}</td>'
             html += "</tr>"
         html += "</table>"
         return html
