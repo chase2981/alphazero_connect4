@@ -28,7 +28,7 @@ st.markdown("""
         .stColumn {
             // flex: 1 1 50px; /* Adjust this value for column width */
             // max-width: 50px; /* Same as above to limit the max width */
-            min-width: 50px;
+            min-width: 40px;
             // width: 50px !important;
             // margin: 2px;
             width: 100%;
