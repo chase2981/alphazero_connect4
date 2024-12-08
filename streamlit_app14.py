@@ -12,6 +12,35 @@ from Connect4 import Connect4
 from AlphaZeroAgent import AlphaZeroAgent
 
 
+# Add custom CSS styles for buttons
+st.markdown("""
+    <style>
+
+        .stButton button {
+            margin: 2px; /* Adjust margin for tighter spacing */
+            padding: 8px 12px; /* Adjust padding for button size */
+            font-size: 18px; /* Adjust font size */
+            width: 100%;
+        }
+        .stHorizontalBlock {
+            // margin: auto;
+        }
+        .stColumn {
+            // flex: 1 1 50px; /* Adjust this value for column width */
+            // max-width: 50px; /* Same as above to limit the max width */
+            min-width: 50px;
+            // width: 50px !important;
+            // margin: 2px;
+            width: 100%;
+            padding: 0px;
+        }
+        .customTd {
+            font-size: 300%; 
+            padding: 5px;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
 # Initialize the game
 class Connect4Game:
     def __init__(self):
@@ -23,7 +52,7 @@ class Connect4Game:
         self.done = False
         self.winning_slots = None
         self.difficulty_map = {"Easy": 200, "Medium": 500, "Hard": 1000}
-        self.difficulty = "Easy"
+        self.difficulty = "Medium"
         self.ai_confidence = "N/A"  # AI confidence as a percentage
 
     def check_winner(self):
@@ -47,7 +76,7 @@ class Connect4Game:
         return None
 
     def draw_board(self):
-        html = '<table style="border-collapse: collapse; margin: 0 auto; text-align: center;">'
+        html = '<table style="border-collapse: collapse; margin: 0 auto; text-align: center; width: 100%;">'
         for r, row in enumerate(self.state):
             html += "<tr>"
             for c, cell in enumerate(row):
@@ -61,7 +90,7 @@ class Connect4Game:
                     color = "🟡"
                 else:
                     color = "⚪"
-                html += f'<td style="font-size: 60px; padding: 5px; {style}">{color}</td>'
+                html += f'<td class="customTd" style="{style}">{color}</td>'
             html += "</tr>"
         html += "</table>"
         return html
@@ -87,7 +116,7 @@ class Connect4Game:
             ).unsqueeze(0).to(config.device)
             value, _ = self.alphazero.network(state_tensor)
             confidence = (value.item() + 1) / 2 * 100  # Scale to 0-100%
-        self.ai_confidence = f"{100 - confidence:.2f}%"
+        self.ai_confidence = f"{confidence:.2f}%"
 
     def handle_move(self, column):
         if self.done:
@@ -131,13 +160,16 @@ game = st.session_state["connect4_game"]
 
 # Sidebar
 st.sidebar.header("Game Settings")
-difficulty = st.sidebar.selectbox("Select Difficulty", ["Easy", "Medium", "Hard"], index=0)
-game.difficulty = difficulty
 
 # Model Loading
 model_selection = st.sidebar.selectbox(
-    "Select Model", ["Default Model", "50-epochs", "80-epochs"], index=0
+    "Select Model", ["Untrained Model", "50-epochs", "80-epochs"], index=0
 )
+
+difficulty = st.sidebar.selectbox("Select Difficulty", ["Easy", "Medium", "Hard"], index=1)
+game.difficulty = difficulty
+
+
 if st.sidebar.button("Load Model"):
     try:
         file_path = f"./models/{model_selection}.pth"
@@ -148,6 +180,16 @@ if st.sidebar.button("Load Model"):
         st.sidebar.error("Model file not found.")
     except Exception as e:
         st.sidebar.error(f"Error loading model: {e}")
+# else:
+#     try:
+#         file_path = f"./models/50-epochs.pth"
+#         pre_trained_weights = torch.load(file_path, map_location=config.device)
+#         game.alphazero.network.load_state_dict(pre_trained_weights)
+#         st.sidebar.success(f"Loaded 50-epochs model successfully!")
+#     except FileNotFoundError:
+#         st.sidebar.error("Model file not found.")
+#     except Exception as e:
+#         st.sidebar.error(f"Error loading model: {e}")
 
 # Reset button
 if st.sidebar.button("Reset Game"):
@@ -158,27 +200,6 @@ if st.sidebar.button("Reset Game"):
 st.markdown("<h1 style='text-align: center;'>Connect 4</h1>", unsafe_allow_html=True)
 st.markdown(game.draw_board(), unsafe_allow_html=True)
 
-# Add custom CSS styles for buttons
-st.markdown("""
-    <style>
-
-        .stButton button {
-            margin: 2px; /* Adjust margin for tighter spacing */
-            padding: 8px 12px; /* Adjust padding for button size */
-            font-size: 18px; /* Adjust font size */
-            width: 100%;
-        }
-        .stHorizontalBlock {
-            margin: auto;
-        }
-        .stColumn {
-            // flex: 1 1 50px; /* Adjust this value for column width */
-            max-width: 50px; /* Same as above to limit the max width */
-            margin: 2px;
-            padding: 0px;
-        }
-    </style>
-""", unsafe_allow_html=True)
 
 # Column Buttons
 cols = st.columns(game.game.cols)
