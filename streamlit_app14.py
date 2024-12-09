@@ -229,7 +229,7 @@ for i, col in enumerate(cols):
 # AI Thinking Indicator
 if game.turn == 1 and not game.done:
     st.markdown(game.ai_thinking_html(), unsafe_allow_html=True)
-    time.sleep(1)  # Simulate AI thinking
+    # time.sleep(1)  # Simulate AI thinking
     message = game.handle_move(None)  # AI makes its move
     st.rerun()
 
