@@ -49,7 +49,7 @@ st.markdown("""
 
           @media (min-width: 1024px) { /* Laptop size and above */
             .dynamic-size {
-            font-size: 4rem;
+            font-size: 3rem;
             }
         }
     </style>
