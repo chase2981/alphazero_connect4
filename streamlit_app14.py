@@ -66,7 +66,7 @@ class Connect4Game:
         self.done = False
         self.winning_slots = None
         self.difficulty_map = {"Easy": 200, "Medium": 500, "Hard": 1000}
-        self.difficulty = "Medium"
+        self.difficulty = "Easy"
         self.ai_confidence = "N/A"  # AI confidence as a percentage
 
     def check_winner(self):
@@ -181,7 +181,7 @@ model_selection = st.sidebar.selectbox(
     "Select Model", ["Tree Search Only Model", "50-epochs", "80-epochs"], index=0
 )
 
-difficulty = st.sidebar.selectbox("Select Difficulty (Tree Search Depth)", ["Easy", "Medium", "Hard"], index=1)
+difficulty = st.sidebar.selectbox("Select Difficulty (Tree Search Depth)", ["Easy", "Medium", "Hard"], index=0)
 game.difficulty = difficulty
 
 
