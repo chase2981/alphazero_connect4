@@ -178,10 +178,10 @@ st.sidebar.header("Game Settings")
 
 # Model Loading
 model_selection = st.sidebar.selectbox(
-    "Select Model", ["Untrained Model", "50-epochs", "80-epochs"], index=0
+    "Select Model", ["Tree Search Only Model", "50-epochs", "80-epochs"], index=0
 )
 
-difficulty = st.sidebar.selectbox("Select Difficulty", ["Easy", "Medium", "Hard"], index=1)
+difficulty = st.sidebar.selectbox("Select Difficulty (Tree Search Depth)", ["Easy", "Medium", "Hard"], index=1)
 game.difficulty = difficulty
 
 
