@@ -212,7 +212,7 @@ if st.sidebar.button("Reset Game"):
     st.rerun()
 
 # Main Interface
-st.markdown("<h1 style='text-align: center;'>Connect 4</h1>", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: center;'>Alpha Zero Connect 4</h3>", unsafe_allow_html=True)
 st.markdown(game.draw_board(), unsafe_allow_html=True)
 
 
