@@ -178,7 +178,7 @@ st.sidebar.header("Game Settings")
 
 # Model Loading
 model_selection = st.sidebar.selectbox(
-    "Select Model", ["Tree Search Only Model", "50-epochs", "80-epochs", "alphazero-epoch-100"], index=0
+    "Select Model", ["Tree Search Only Model", "50-epochs", "80-epochs-custom", "alphazero-epoch-100"], index=0
 )
 
 difficulty = st.sidebar.selectbox("Select Difficulty (Tree Search Depth)", ["Easy", "Medium", "Hard"], index=0)
@@ -195,16 +195,6 @@ if st.sidebar.button("Load Model"):
         st.sidebar.error("Model file not found.")
     except Exception as e:
         st.sidebar.error(f"Error loading model: {e}")
-# else:
-#     try:
-#         file_path = f"./models/50-epochs.pth"
-#         pre_trained_weights = torch.load(file_path, map_location=config.device)
-#         game.alphazero.network.load_state_dict(pre_trained_weights)
-#         st.sidebar.success(f"Loaded 50-epochs model successfully!")
-#     except FileNotFoundError:
-#         st.sidebar.error("Model file not found.")
-#     except Exception as e:
-#         st.sidebar.error(f"Error loading model: {e}")
 
 # Reset button
 if st.sidebar.button("Reset Game"):
